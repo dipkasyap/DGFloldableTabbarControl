@@ -1,2 +1,2 @@
 # DGFloldableTabbarControl
-An elegant foldable tabbar control.
+An elegant foldable tabbar control. (iPad)
