@@ -1,24 +1,130 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A277" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13178.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="ipad9_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13156.2"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="KohinoorBangla.ttc">
+            <string>KohinoorBangla-Semibold</string>
+        </array>
+    </customFonts>
     <scenes>
-        <!--View Controller-->
+        <!--ContainerVC-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ContainerVC" customModule="DGFloldableTabbarControl" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="unX-iu-HvN">
+                                <rect key="frame" x="0.0" y="148" width="768" height="876"/>
+                                <connections>
+                                    <segue destination="Wp5-qc-mBc" kind="embed" id="2uZ-Xk-Dn4"/>
+                                </connections>
+                            </containerView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HwH-vA-Ycd">
+                                <rect key="frame" x="0.0" y="20" width="768" height="128"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DGFloldableTabbarControl Demo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sVL-B5-gvg">
+                                        <rect key="frame" x="225.5" y="49.5" width="317.5" height="30"/>
+                                        <fontDescription key="fontDescription" name="KohinoorBangla-Semibold" family="Kohinoor Bangla" pointSize="21"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.29172813889999999" green="0.72367650269999995" blue="0.92154198880000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="sVL-B5-gvg" firstAttribute="centerX" secondItem="HwH-vA-Ycd" secondAttribute="centerX" id="BGH-t5-QOL"/>
+                                    <constraint firstAttribute="height" constant="128" id="kl4-BB-9aU"/>
+                                    <constraint firstItem="sVL-B5-gvg" firstAttribute="centerY" secondItem="HwH-vA-Ycd" secondAttribute="centerY" id="v2R-aj-QiU"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="onX-fh-m4d" customClass="DGFloldableTabbarControl" customModule="DGFloldableTabbarControl" customModuleProvider="target">
+                                <rect key="frame" x="700" y="956" width="48" height="48"/>
+                                <color key="backgroundColor" red="0.6424098014831543" green="0.11312177032232285" blue="0.26957768201828003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="onX-fh-m4d" secondAttribute="height" multiplier="1:1" id="4We-NV-BPM"/>
+                                    <constraint firstAttribute="width" constant="48" id="NBI-99-RyH"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="unX-iu-HvN" secondAttribute="bottom" id="A9P-4O-0qX"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="onX-fh-m4d" secondAttribute="trailing" constant="20" id="FdE-EO-mMk"/>
+                            <constraint firstItem="unX-iu-HvN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Mm8-Iv-zeP"/>
+                            <constraint firstItem="HwH-vA-Ycd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="bRs-ia-CoU"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="onX-fh-m4d" secondAttribute="bottom" constant="20" id="gGt-Yd-0Zr"/>
+                            <constraint firstAttribute="trailing" secondItem="HwH-vA-Ycd" secondAttribute="trailing" id="mSm-ur-0YH"/>
+                            <constraint firstItem="unX-iu-HvN" firstAttribute="top" secondItem="HwH-vA-Ycd" secondAttribute="bottom" id="rF0-2W-eH9"/>
+                            <constraint firstItem="HwH-vA-Ycd" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="tbM-Zf-6NS"/>
+                            <constraint firstItem="unX-iu-HvN" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="zKt-zh-Qcv"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="bottomBar" destination="onX-fh-m4d" id="NMp-fe-tmO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="634.375" y="62.695312499999993"/>
+        </scene>
+        <!--ListVC-->
+        <scene sceneID="8OS-9S-kjC">
+            <objects>
+                <viewController id="Wp5-qc-mBc" customClass="ListVC" customModule="DGFloldableTabbarControl" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BWz-Be-7Ta">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="876"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5sT-g2-fbW">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="876"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="70A-8B-HMx">
+                                    <size key="itemSize" width="187" height="179"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="7J6-D8-Uxw">
+                                        <rect key="frame" x="0.0" y="0.0" width="187" height="179"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="187" height="179"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                        <color key="backgroundColor" red="0.77033191919999999" green="0.61118942499999995" blue="0.1997073889" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="Wp5-qc-mBc" id="4wy-cQ-6xr"/>
+                                    <outlet property="delegate" destination="Wp5-qc-mBc" id="sKi-IN-TqB"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="5sT-g2-fbW" firstAttribute="leading" secondItem="BWz-Be-7Ta" secondAttribute="leading" id="0Hx-Dp-OPX"/>
+                            <constraint firstAttribute="trailing" secondItem="5sT-g2-fbW" secondAttribute="trailing" id="3hA-yz-pxf"/>
+                            <constraint firstItem="5sT-g2-fbW" firstAttribute="top" secondItem="BWz-Be-7Ta" secondAttribute="top" id="eA0-Zb-O93"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="5sT-g2-fbW" secondAttribute="bottom" id="zWE-zX-TqJ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="nkc-YW-Rcr"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fY3-Bw-zJS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1266" y="63"/>
         </scene>
     </scenes>
 </document>

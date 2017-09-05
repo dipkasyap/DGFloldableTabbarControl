@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:DGFloldableTabbarControl.xcodeproj">
+      location = "self:/Users/apple/Desktop/PROJECT_DEMO/DGFloldableTabbarControl/DGFloldableTabbarControl.xcodeproj">
    </FileRef>
 </Workspace>
