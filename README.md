@@ -8,13 +8,13 @@ An elegant foldable tabbar control. (iPad)
 
 
 # Usage
-
-1. Place a View on your storyboard and assign DGFloldableTabbarControl class.
-2. Drag outlet of that View on your controller.
+1. Drag and drop DGFoldableTabbarControl folder from demo to your project.
+2. Place a View on your storyboard and assign DGFloldableTabbarControl class.
+3. Drag outlet of that View on your controller.
    
         @IBOutlet weak var bottomBar: DGFloldableTabbarControl!
 
-2. Customize your tabbar as following 
+4. Customize your tabbar as following 
 
         self.bottomBar.options        = [BarOptions("Home", image: "home"),BarOptions("List", image: "category"),BarOptions("Search", image: "filter"),BarOptions("Dashboard", image: "my_collection"),BarOptions("Logout", image: "signout")]
         self.bottomBar.currentValue   = self.bottomBar.options[0]
@@ -30,3 +30,26 @@ An elegant foldable tabbar control. (iPad)
             index in
             print("[---] Did select  at index: \(index)")
         }
+
+
+//
+// Created by Dip kasyap inspired from Vladislav Kovalyov
+// Copyright © Dip kasyap All rights reserved.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+// THE SOFTWARE.
