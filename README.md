@@ -11,7 +11,8 @@ An elegant foldable tabbar control. (iPad)
 
 1. Place a View on your storyboard and assign DGFloldableTabbarControl class.
 2. Drag outlet of that View on your controller.
-    @IBOutlet weak var bottomBar: DGFloldableTabbarControl!
+   
+        @IBOutlet weak var bottomBar: DGFloldableTabbarControl!
 
 2. Customize your tabbar as following 
 
