@@ -10,7 +10,9 @@ An elegant foldable tabbar control. (iPad)
 # Usage
 
 1. Place a View on your storyboard and assign DGFloldableTabbarControl class.
-2. Drag outlet of that View on your controller 
+2. Drag outlet of that View on your controller.
+    @IBOutlet weak var bottomBar: DGFloldableTabbarControl!
+
 2. Customize your tabbar as following 
 
         self.bottomBar.options        = [BarOptions("Home", image: "home"),BarOptions("List", image: "category"),BarOptions("Search", image: "filter"),BarOptions("Dashboard", image: "my_collection"),BarOptions("Logout", image: "signout")]
