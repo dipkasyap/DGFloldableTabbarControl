@@ -1,5 +1,12 @@
+<p align="center"> 
+<img src="https://user-images.githubusercontent.com/12591229/36713674-ded0ca38-1bb6-11e8-8448-1e18b7d345cf.png">
+</p>
+
+
 # DGFloldableTabbarControl
-![bar](https://user-images.githubusercontent.com/12591229/30094395-d8aadb7a-92eb-11e7-8e19-e3c90c17a3c7.png)
+<p align="center"> 
+<img src="https://user-images.githubusercontent.com/12591229/30094395-d8aadb7a-92eb-11e7-8e19-e3c90c17a3c7.png">
+</p>
 
 An elegant foldable tabbar control. (iPad)
 
