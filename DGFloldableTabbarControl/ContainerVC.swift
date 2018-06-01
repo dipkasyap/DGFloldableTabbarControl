@@ -65,6 +65,11 @@ class ContainerVC: UIViewController {
         self.bottomBar.optionSelectionBlock = {
             index in
             print("[---] Did select  at index: \(index)")
+            
+            if let child = self.childViewControllers.first  as? ListVC {
+                child.collectionView.reloadData()
+            }
+            
         }
     }
 

@@ -26,6 +26,7 @@ class ListVC: BaseVC,UICollectionViewDataSource,UICollectionViewDelegateFlowLayo
    
     let dx:CGFloat = 10
     let vMargin:CGFloat = 10
+    @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
