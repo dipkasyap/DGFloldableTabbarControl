@@ -78,12 +78,9 @@ class TabItem: UIButton  {
     //MARK:- Init
     convenience init (withImage image:UIImage , andTitle title:String?) {
         self.init()
-                
         self.image = image
         self.title = title
-        
     }
-    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -92,24 +89,26 @@ class TabItem: UIButton  {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        
         setUp()
     }
     
+    //MARK:- setup
     func setUp() {
-        
+        //decoration
         self.addSubview(containerView!)
         self.containerView?.translatesAutoresizingMaskIntoConstraints = false
-        
         self.containerView?.backgroundColor = .red
-        
         self.containerView?.addSubview(imageVU!)
         self.containerView?.addSubview(titleLbl)
-        
-        //1 Centering
+        //constraints
+        manageConstraints()
+    }
+    
+    private func manageConstraints() {
+        //1. Centering
         self.imageVU?.centerYAnchor.constraint(equalTo:
             centerYAnchor
-        ).isActive = true
+            ).isActive = true
         
         self.containerView?.centerYAnchor.constraint(equalTo:
             centerYAnchor
@@ -118,42 +117,18 @@ class TabItem: UIButton  {
             centerXAnchor
             ).isActive = true
         
-        //TEsting colors 
-        //self.imageVU?.backgroundColor = UIColor.lightGray
-        //self.titleLbl.backgroundColor = UIColor.black.withAlphaComponent(0.4)
-        
         self.titleLbl.centerYAnchor.constraint(equalTo:
             centerYAnchor
             ).isActive = true
         
         //2. Size
-         self.containerView!.addConstraintsWithFormat("H:[v0(\(imageWidth))]", views: imageVU!)
-         self.containerView!.addConstraintsWithFormat("V:[v0(\(imageWidth))]", views: imageVU!)
+        self.containerView!.addConstraintsWithFormat("H:[v0(\(imageWidth))]", views: imageVU!)
+        self.containerView!.addConstraintsWithFormat("V:[v0(\(imageWidth))]", views: imageVU!)
         
-        //3 Positioning
+        //3. Positioning
         self.containerView!.addConstraintsWithFormat("H:|[v0]-4-[v1]|", views: imageVU!,titleLbl)
-
-        //adding constants
-        //self.addConstraintsWithFormat("H:[v0(\(imageWidth))]", views: imageVU!)
-        //self.addConstraintsWithFormat("V:[v0(\(imageWidth))]", views: imageVU!)
-        
-        //self.addConstraintsWithFormat("V:|-\(verticalPadding)-[v0][v1]|", views: imageVU!,titleLbl)
-        
-       // self.addConstraintsWithFormat("H:|[v0]|", views: titleLbl)
-        //        titleLbl.centerXAnchor.constraint(
-        //            equalTo: centerXAnchor,
-        //            constant: 0).isActive = true
-        //
-        //imageVU?.centerXAnchor.constraint(
-        //equalTo: centerXAnchor,
-        //constant: 0).isActive = true
-        
-        
     }
-    
-    
-    
-    
+
     //MARK:- Touch actions
     open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
@@ -161,8 +136,6 @@ class TabItem: UIButton  {
         UIView.animate(withDuration: self.pressSpringDuration, delay: 0, usingSpringWithDamping: self.pressSpringDamping, initialSpringVelocity: 0, options: [.curveLinear, .allowUserInteraction], animations: { () -> Void in
             self.transform = CGAffineTransform(scaleX: self.minimumScale, y: self.minimumScale)
         }, completion: nil)
-        
-        // self.setHighlighted(highlight: true)
     }
     
     open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -171,9 +144,6 @@ class TabItem: UIButton  {
         UIView.animate(withDuration: self.releaseSpringDuration, delay: 0, usingSpringWithDamping: self.releaseSpringDamping, initialSpringVelocity: 0, options: [.curveLinear, .allowUserInteraction], animations: { () -> Void in
             self.transform = CGAffineTransform.identity
         }, completion: nil)
-        
-        //self.setHighlighted(highlight: false)
-        
     }
     
     open override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -194,182 +164,10 @@ class TabItem: UIButton  {
             self.transform = CGAffineTransform.identity
         }, completion: nil)
     }
-    
-    
 }
 
 
-
-
-//
-//  TabItem.swift
-//  LEGj
-//
-//  Created by Apple on 9/1/17.
-//  Copyright © 2017 dip. All rights reserved.
-//
-
-import UIKit
-
-class TabArrowItem: UIButton  {
-    
-    @IBInspectable var image:UIImage? {
-        didSet {
-            if let imageView  = imageVU {
-                imageView.image = image
-            }
-        }
-    }
-    
-    lazy var imageVU:UIImageView? = {
-        
-        let imageVU = UIImageView()
-        return imageVU
-    }()
-    
-    @IBInspectable var title:String? {
-        didSet {
-            self.titleLbl.text = title
-        }
-    }
-    
-    var titleLbl: UILabel = {
-        let lbl = UILabel()
-        lbl.font = UIFont.systemFont(ofSize: 14)
-        lbl.adjustsFontSizeToFitWidth = true
-        lbl.textColor = UIColor.white
-        lbl.textAlignment = .left
-        return lbl
-    }()
-    
-    let padding:CGFloat = 5
-    var verticalPadding:CGFloat = 5
-    var interItemPadding:CGFloat = 0
-    
-    var imageWidth:CGFloat = {
-        var val:CGFloat = 20.0
-        return val
-    }()
-    
-    open var minimumScale: CGFloat = 0.95
-    open var pressSpringDamping: CGFloat = 0.4
-    open var releaseSpringDamping: CGFloat = 0.35
-    open var pressSpringDuration = 0.4
-    open var releaseSpringDuration = 0.5
-    open var cornorRadious:CGFloat = 6.0
-    
-    //MARK:- Init
-    convenience init (withImage image:UIImage , andTitle title:String?) {
-        self.init()
-        
-        self.image = image
-        self.title = title
-        
-    }
-    
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setUp()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
-        setUp()
-    }
-    
-    func setUp() {
-        
-        self.addSubview(imageVU!)
-        self.addSubview(titleLbl)
-        
-        //1 Centering
-        self.imageVU?.centerYAnchor.constraint(equalTo:
-            centerYAnchor
-            ).isActive = true
-        
-        //TEsting colors
-        //self.imageVU?.backgroundColor = UIColor.lightGray
-        //self.titleLbl.backgroundColor = UIColor.black.withAlphaComponent(0.4)
-        
-        self.titleLbl.centerYAnchor.constraint(equalTo:
-            centerYAnchor
-            ).isActive = true
-        
-        //2. Size
-        self.addConstraintsWithFormat("H:[v0(\(imageWidth))]", views: imageVU!)
-        self.addConstraintsWithFormat("V:[v0(\(imageWidth))]", views: imageVU!)
-        
-        //3 Positioning
-        self.addConstraintsWithFormat("H:|-20-[v0]-2-[v1]|", views: imageVU!,titleLbl)
-        
-        //adding constants
-        //self.addConstraintsWithFormat("H:[v0(\(imageWidth))]", views: imageVU!)
-        //self.addConstraintsWithFormat("V:[v0(\(imageWidth))]", views: imageVU!)
-        
-        //self.addConstraintsWithFormat("V:|-\(verticalPadding)-[v0][v1]|", views: imageVU!,titleLbl)
-        
-        // self.addConstraintsWithFormat("H:|[v0]|", views: titleLbl)
-        //        titleLbl.centerXAnchor.constraint(
-        //            equalTo: centerXAnchor,
-        //            constant: 0).isActive = true
-        //
-        //imageVU?.centerXAnchor.constraint(
-        //equalTo: centerXAnchor,
-        //constant: 0).isActive = true
-        
-        
-    }
-    
-    
-    
-    
-    //MARK:- Touch actions
-    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        
-        UIView.animate(withDuration: self.pressSpringDuration, delay: 0, usingSpringWithDamping: self.pressSpringDamping, initialSpringVelocity: 0, options: [.curveLinear, .allowUserInteraction], animations: { () -> Void in
-            self.transform = CGAffineTransform(scaleX: self.minimumScale, y: self.minimumScale)
-        }, completion: nil)
-        
-        // self.setHighlighted(highlight: true)
-    }
-    
-    open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesEnded(touches, with: event)
-        
-        UIView.animate(withDuration: self.releaseSpringDuration, delay: 0, usingSpringWithDamping: self.releaseSpringDamping, initialSpringVelocity: 0, options: [.curveLinear, .allowUserInteraction], animations: { () -> Void in
-            self.transform = CGAffineTransform.identity
-        }, completion: nil)
-        
-        //self.setHighlighted(highlight: false)
-        
-    }
-    
-    open override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesEnded(touches, with: event)
-        
-        let location = touches.first!.location(in: self)
-        if !self.bounds.contains(location) {
-            UIView.animate(withDuration: self.releaseSpringDuration, delay: 0, usingSpringWithDamping: self.releaseSpringDamping, initialSpringVelocity: 0, options: [.curveLinear, .allowUserInteraction], animations: { () -> Void in
-                self.transform = CGAffineTransform.identity
-            }, completion: nil)
-        }
-    }
-    
-    open override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesCancelled(touches, with: event)
-        
-        UIView.animate(withDuration: self.releaseSpringDuration, delay: 0, usingSpringWithDamping: self.releaseSpringDamping, initialSpringVelocity: 0, options: [.curveLinear, .allowUserInteraction], animations: { () -> Void in
-            self.transform = CGAffineTransform.identity
-        }, completion: nil)
-    }
-    
-    
-}
-
-
+// MARK: - Utils
 extension UIView {
     func addConstraintsWithFormat(_ format: String, views: UIView...) {
         var viewsDictionary = [String: UIView]()
@@ -378,7 +176,6 @@ extension UIView {
             view.translatesAutoresizingMaskIntoConstraints = false
             viewsDictionary[key] = view
         }
-        
         addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
     }
 }

@@ -24,10 +24,8 @@ import UIKit
 
 typealias OptionSelectionBlock = (_ index: Int) -> Void
 
-// MARK: - Init
 @IBDesignable
 class DGFloldableTabbarControl: UIView {
-// MARK: Declared properties
 
     var barWidth = (UIApplication.shared.delegate as! AppDelegate).window!.frame.width * CGFloat(0.95)
     var backGorundColor = UIColor(red: 0.643, green: 0.114, blue: 0.271, alpha: 1.00)
@@ -38,7 +36,7 @@ class DGFloldableTabbarControl: UIView {
     }
     
     var textFont  = UIFont.systemFont(ofSize: 22.0)
-   
+    
     var textColor = UIColor.white{
         didSet {
             self.button.setTitleColor(self.textColor, for: .normal)
@@ -53,22 +51,13 @@ class DGFloldableTabbarControl: UIView {
     var animationDuration: TimeInterval = 0.275
     var minOptionSize: CGFloat = 60
     
-    var imageInsets: UIEdgeInsets = UIEdgeInsetsMake(6, 6, 6, 6)
-    {
+    var imageInsets: UIEdgeInsets = UIEdgeInsetsMake(6, 6, 6, 6) {
         didSet {
             self.button.imageEdgeInsets = imageInsets
         }
     }
     
-    
-    override var bounds: CGRect {
-        didSet {
-            // Do stuff here
-        }
-    }
-    
-    var buttonBackgroundColor = UIColor(red: 0.643, green: 0.114, blue: 0.271, alpha: 1.00)
-    {
+    var buttonBackgroundColor = UIColor(red: 0.643, green: 0.114, blue: 0.271, alpha: 1.00) {
         didSet {
             self.button.backgroundColor = buttonBackgroundColor
         }
@@ -76,57 +65,40 @@ class DGFloldableTabbarControl: UIView {
     
     var expandedButtonBackgroundColor = UIColor.red
     
-    var selectionColor = UIColor.gray
-    {
+    var selectionColor = UIColor.gray {
         didSet {
             self.button.setBackgroundImage(UIImage.imageWithColor(color: buttonBackgroundColor), for: .highlighted)
         }
     }
     
-    var cornerRadius: CGFloat = 0
-    {
+    var cornerRadius: CGFloat = 0{
         didSet {
             self.button.layer.cornerRadius      = cornerRadius
             self.optionsView.layer.cornerRadius = cornerRadius
         }
     }
     
-    var currentIndex: Int! = 0 {
-        didSet {
-            
-        }
-    }
+    let arrowWidth:CGFloat = 80.0
 
-    var currentValue: AnyObject! {
-        didSet
-        {
-            /* if currentValue is String
-            {
-                self.button.setTitle(currentValue as? String, for: .normal)
-                self.button.setImage(nil, for: .normal)
-            }
-            else if currentValue is UIImage
-            {
-                self.button.setImage(currentValue as? UIImage, for: .normal)
-                self.button.setTitle(nil, for: .normal)
-            }
-             */
-        }
-    }
+    ///Default is 0
+    var currentIndex: Int! = 0
+    
+    var currentValue: AnyObject!
     
     var optionSelectionBlock: OptionSelectionBlock?
-     let btnArrow = UIButton()
-     var button      = UIButton()
-     var optionsView = UIView()
-     var stackView = UIStackView()
-
+    
+    let btnArrow = UIButton()
+    var button      = UIButton()
+    var optionsView = UIView()
+    var stackView = UIStackView()
+    
     var buttonIcon:UIImage? {
         didSet {
             self.button.setImage(buttonIcon, for: .normal)
         }
     }
     
-// MARK: Init
+    //MARK:- Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setupView()
@@ -141,36 +113,13 @@ class DGFloldableTabbarControl: UIView {
         self.observeOrientation()
     }
     
-    override func draw(_ rect: CGRect) {
-        super.draw(rect)
-        self.configureOptions()
-    }
-    
-    override func awakeFromNib() {
-       // self.configureOptions()
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        self.button.frame  = self.bounds
-        self.optionsView.frame = self.bounds
-    }
- 
-    override func updateConstraints() {
-        super.updateConstraints()
-    }
-    
-    override func layoutIfNeeded() {
-        super.layoutIfNeeded()
-    }
- 
-    func observeOrientation() {
+    // MARK: -
+    private func observeOrientation() {
         NotificationCenter.default.addObserver(self, selector: #selector(DGFloldableTabbarControl.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
-        
     }
-
-    @objc func rotated() {
-       
+    
+    @objc private func rotated() {
+        
         if UIDeviceOrientationIsLandscape(UIDevice.current.orientation) {
             print("landScape")
             barWidth = (UIApplication.shared.delegate as! AppDelegate).window!.frame.height * CGFloat(0.95)
@@ -179,15 +128,30 @@ class DGFloldableTabbarControl: UIView {
             print("portait")
             barWidth = (UIApplication.shared.delegate as! AppDelegate).window!.frame.width * CGFloat(0.95)
         }
-        
-        //self.superview?.layoutIfNeeded()
-        
-       // self.hideOptions()
-
-        //self.setupView()
-        //self.layoutSubviews()
     }
     
+    
+    // MARK: - View Setup
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        self.configureOptions()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.button.frame  = self.bounds
+        self.optionsView.frame = self.bounds
+    }
+    
+    override func updateConstraints() {
+        super.updateConstraints()
+    }
+    
+    override func layoutIfNeeded() {
+        super.layoutIfNeeded()
+    }
+
+
     
     private func setupStackView(){
         self.stackView.axis = .horizontal
@@ -195,9 +159,7 @@ class DGFloldableTabbarControl: UIView {
         self.stackView.distribution = .fillEqually
     }
     
-    /**
-        Perform initial setup of `VKExpandableButton` view
-    */
+
     private func setupView() {
         
         self.button.frame               = self.bounds
@@ -213,7 +175,7 @@ class DGFloldableTabbarControl: UIView {
         self.button.setTitleColor(self.textColor, for: .normal)
         
         self.button.titleLabel?.adjustsFontSizeToFitWidth = true
-     
+        
         self.button.setBackgroundImage(UIImage.imageWithColor(color: buttonBackgroundColor), for: .normal)
         self.button.addTarget(self, action: #selector(DGFloldableTabbarControl.showOptions), for: .touchUpInside)
         
@@ -223,25 +185,19 @@ class DGFloldableTabbarControl: UIView {
         self.button.layer.masksToBounds      = true
         self.optionsView.layer.masksToBounds = true
     }
-    
-    let arrrowWidth:CGFloat = 80.0
-}
 
-// MARK: - Public methods
-extension DGFloldableTabbarControl {
     
-    func getWitdthOfItem(_ atIndex:Int)->CGFloat {
-       // self.barWidth = self.optionsView.frame.width
-        
+   private func getWitdthOfItem(_ atIndex:Int)->CGFloat {
+        // self.barWidth = self.optionsView.frame.width
         guard atIndex != self.options.count else {
-            return arrrowWidth
+            return arrowWidth
         }
-        return (self.barWidth-arrrowWidth)/CGFloat(options.count)
+        return (self.barWidth-arrowWidth)/CGFloat(options.count)
     }
-    /**
-        Show options view
-    */
-    @objc func configureOptions() {
+   
+    
+     //Show tabar
+    @objc private func configureOptions() {
         
         self.isExpanded = true
         
@@ -253,19 +209,19 @@ extension DGFloldableTabbarControl {
         
         self.superview?.addSubview(optionsView)
         self.optionsView.addSubview(stackView)
-    
+        
         var i = 0
         
         // Create buttons for each option
         for option in self.options {
-           
+            
             // Prepare frame
             let frame = CGRect(x:desiredOrigin, y:0, width:self.getWitdthOfItem(i), height:optionsView.frame.size.height)
             
             let button = TabItem(frame: frame)
             button.image = option.image
             button.title = option.title
-           
+            
             // Configure button
             button.backgroundColor = UIColor.clear
             button.setBackgroundImage(UIImage.imageWithColor(color: self.selectionColor), for: .selected)
@@ -274,7 +230,7 @@ extension DGFloldableTabbarControl {
             button.layer.masksToBounds = true
             button.tag = i
             button.isSelected = i == currentIndex
-         
+            
             // Add button to 'optionView'
             self.stackView.addArrangedSubview(button)
             
@@ -294,22 +250,22 @@ extension DGFloldableTabbarControl {
         
         //initially showing options
         self.showOptions()
-  
+        
     }
     
-    func addConstraints() {
+    private func addConstraints() {
         self.superview?.addConstraintsWithFormat("H:|-20-[v0]-20-|", views: optionsView)
         self.superview?.addConstraintsWithFormat("V:[v0(\(self.frame.height))]-20-|", views: optionsView)
-        self.optionsView.addConstraintsWithFormat("H:|[v0]-(\(self.arrrowWidth))-|", views: stackView)
+        self.optionsView.addConstraintsWithFormat("H:|[v0]-(\(self.arrowWidth))-|", views: stackView)
         self.optionsView.addConstraintsWithFormat("V:|[v0]|", views: stackView)
-        self.optionsView.addConstraintsWithFormat("H:[v0(\(arrrowWidth))]", views: btnArrow)
+        self.optionsView.addConstraintsWithFormat("H:[v0(\(arrowWidth))]", views: btnArrow)
         self.optionsView.addConstraintsWithFormat("V:|[v0]|", views: btnArrow)
         self.btnArrow.leftAnchor.constraint(equalTo:
             stackView.rightAnchor
             ).isActive = true
     }
     
-    @objc func showOptions() {
+    @objc private func showOptions() {
         
         // Show
         self.superview?.addSubview(optionsView)
@@ -324,109 +280,75 @@ extension DGFloldableTabbarControl {
         
         UIView.animate(withDuration: self.animationDuration) {
             self.optionsView.backgroundColor = self.expandedButtonBackgroundColor
-           
             self.optionsView.isHidden = false
-
             self.superview?.layoutIfNeeded()
         }
     }
     
     /**
-        Close options view
-        - Parameter selectedIndex: Index of selected option button
-    */
-    func hideOptions(selectedIndex: Int = 0)  {
+     collaps tabbar
+     - Parameter selectedIndex: Index of selected tab
+     */
+    private func hideOptions(selectedIndex: Int = 0)  {
         
         self.isExpanded = false
-        
-        // Hide all options buttons except of selected one
-        UIView.animate(withDuration: self.animationDuration / 2)
-        {
-            //for view in self.optionsView.subviews
-            for view in self.stackView.subviews {
-               
-                //(view as! TabItem).isSelected = view.tag == selectedIndex
-                
-                if view.tag != selectedIndex {
-                    //view.alpha = 0
-                }
-            }
-        }
-        
-        // Hide
+        //Hide
         UIView.animate(withDuration: self.animationDuration, animations: {
-            
             self.optionsView.backgroundColor = self.buttonBackgroundColor
             self.optionsView.frame = self.frame
-      
-        })
-        { (completed) in
-            
+        }) { (completed) in
             UIView.animate(withDuration: self.animationDuration, animations: {
                 self.optionsView.isHidden = true
             })
         }
     }
-}
-
-// MARK: - Private
-extension DGFloldableTabbarControl {
-
-    /**
-        Selector of `self.button`
-    */
+    
+    // MARK: - Actions 
+     //Selector of `self.button`
     @objc private func onButtonAction(sender: UIButton) {
         self.showOptions()
     }
     
-    /**
-        Selector for buttons from `optionView`
-    */
-    
-    @objc func didSelect(sender: UIButton) {
+     //Selector for each tab
+     @objc private func didSelect(sender: UIButton) {
         
-        // Update selected value
+        //Update selected value
         self.currentValue = self.options[sender.tag]
         
-        // Hide all options buttons except of selected one
+        //Hide all options buttons except of selected one
         UIView.animate(withDuration: self.animationDuration / 2) {
             //for view in self.optionsView.subviews
             for view in self.stackView.subviews {
                 (view as! TabItem).isSelected = view.tag == sender.tag
             }
         }
+        
         // Perform completion block
         if let completionBlock = self.optionSelectionBlock {
             completionBlock(sender.tag)
         }
     }
-
     
-    @objc func onOptionButtonAction(sender: UIButton) {
-
+    
+    @objc private func onOptionButtonAction(sender: UIButton) {
         // Close options view if it is required
-        if self.autoHideOptions
-        {
-            UIView.animate(withDuration: self.animationDuration, animations:
-            {
-                sender.frame = CGRect(x:0, y:0, width:self.button.frame.size.width, height:self.button.frame.size.height)
+        if self.autoHideOptions{
+            UIView.animate(withDuration: self.animationDuration, animations: {
+                    sender.frame = CGRect(x:0, y:0, width:self.button.frame.size.width, height:self.button.frame.size.height)
             })
-            
             self.hideOptions(selectedIndex: sender.tag)
         }
     }
 }
 
 // MARK: - Utils
-extension UIImage
-{
+extension UIImage {
     /**
-        Create image from specific `UIColor`
-        - Parameter color: Specific color
-        - Returns: `UIImage` object filled by specific color
-    */
-     class func imageWithColor(color: UIColor) -> UIImage
-    {
+     Create image from specific `UIColor`
+     - Parameter color: Specific color
+     - Returns: `UIImage` object filled by specific color
+     */
+    class func imageWithColor(color: UIColor) -> UIImage {
         let size = CGSize(width: 64, height: 64)
         let rect = CGRect(x:0, y:0, width:size.width, height:size.height)
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
