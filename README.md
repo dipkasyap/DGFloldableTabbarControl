@@ -42,7 +42,7 @@ An elegant foldable tabbar control. (iPad)
 
 
 #Created by Dip kasyap inspired from Vladislav Kovalyov
-#Licence
+# Licence
 
 The MIT License (MIT) Copyright (c) 2014 Dip Kasyap (Dpd Ghimire) (pr0gramm3r8hai)
 
